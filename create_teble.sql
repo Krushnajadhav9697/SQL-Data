@@ -1,0 +1,13 @@
+CREATE DATABASE kj45;
+SHOW DATABASES;
+USE kj45;
+
+
+CREATE TABLE first(
+id INT PRIMARY KEY,
+name CHAR(50) ,
+age INT NOT NULL,
+city CHAR(25)
+);
+
+DESCRIBE first ;
