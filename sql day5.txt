@@ -1,0 +1,485 @@
+Microsoft Windows [Version 10.0.22631.3235]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Program Files\MySQL\MySQL Server 8.0\bin>mysql -u root -p -h localhost
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.36 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use kj45;
+Database changed
+mysql> show tables;
++----------------+
+| Tables_in_kj45 |
++----------------+
+| collage        |
+| my             |
+| student        |
++----------------+
+3 rows in set (2.37 sec)
+
+mysql> create table student_data(
+    -> id int primary key auto_increment,department varchar(50) not null,marks float notnull,paid_fees double not null ,attendance float not null);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'notnull,paid_fees double not null ,attendance float not null)' at line 2
+mysql> create table student_data(
+    -> id int primary key auto_increment,department varchar(50) not null,marks float not null,paid_fees double not null ,attendance float not null);
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> desc student_data;
++------------+-------------+------+-----+---------+----------------+
+| Field      | Type        | Null | Key | Default | Extra          |
++------------+-------------+------+-----+---------+----------------+
+| id         | int         | NO   | PRI | NULL    | auto_increment |
+| department | varchar(50) | NO   |     | NULL    |                |
+| marks      | float       | NO   |     | NULL    |                |
+| paid_fees  | double      | NO   |     | NULL    |                |
+| attendance | float       | NO   |     | NULL    |                |
++------------+-------------+------+-----+---------+----------------+
+5 rows in set (0.02 sec)
+
+mysql> alter table student_data paid_fees int not null;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'paid_fees int not null' at line 1
+mysql> alter table student_data modfy paid_fees int not null;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'modfy paid_fees int not null' at line 1
+mysql> alter table student_data modify paid_fees int not null;
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table student_data modify paid_fees bigint not null;
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student_data;
++------------+-------------+------+-----+---------+----------------+
+| Field      | Type        | Null | Key | Default | Extra          |
++------------+-------------+------+-----+---------+----------------+
+| id         | int         | NO   | PRI | NULL    | auto_increment |
+| department | varchar(50) | NO   |     | NULL    |                |
+| marks      | float       | NO   |     | NULL    |                |
+| paid_fees  | bigint      | NO   |     | NULL    |                |
+| attendance | float       | NO   |     | NULL    |                |
++------------+-------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> insert into student(department,marks,paid_fees,attendance) values
+    -> ('Electrical',;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 2
+mysql> alter table student_data add column name varchar(50) not null after id;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student_data;
++------------+-------------+------+-----+---------+----------------+
+| Field      | Type        | Null | Key | Default | Extra          |
++------------+-------------+------+-----+---------+----------------+
+| id         | int         | NO   | PRI | NULL    | auto_increment |
+| name       | varchar(50) | NO   |     | NULL    |                |
+| department | varchar(50) | NO   |     | NULL    |                |
+| marks      | float       | NO   |     | NULL    |                |
+| paid_fees  | bigint      | NO   |     | NULL    |                |
+| attendance | float       | NO   |     | NULL    |                |
++------------+-------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> insert into student(department,marks,paid_fees,attendance) values
+    -> (;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 2
+mysql> insert into student(name,department,marks,paid_fees,attendance) values
+    -> ('krushna','electrical',90,1000000,100),
+    -> ('sanket','IT',45,121212,50),
+    -> ('rajith','CS',44,14256,55),
+    -> ('Ram','mechanical',54,45126,84),
+    -> ('mayur','electrical',86,25146,95),
+    -> ('priyanka','CS',99,12451,75),
+    -> ('sushant','civil',87,12145,65),
+    -> ('virendra','civil',56,14524,88),
+    -> ('bassi','mechanical',45,45751,59),
+    -> ('raone','design',81,23152,49),
+    -> ('naruto','jutsu',10,15424,14);
+ERROR 1054 (42S22): Unknown column 'name' in 'field list'
+mysql> select * from student_data;
+Empty set (0.00 sec)
+
+mysql> insert into student_data(name,department,marks,paid_fees,attendance) values
+    -> ('krushna','electrical',90,1000000,100),
+    -> ('sanket','IT',45,121212,50),
+    -> ('rajith','CS',44,14256,55),
+    -> ('Ram','mechanical',54,45126,84),
+    -> ('mayur','electrical',86,25146,95),
+    -> ('priyanka','CS',99,12451,75),
+    -> ('sushant','civil',87,12145,65),
+    -> ('virendra','civil',56,14524,88),
+    -> ('bassi','mechanical',45,45751,59),
+    -> ('raone','design',81,23152,49),
+    -> ('naruto','jutsu',10,15424,14);
+Query OK, 11 rows affected (0.01 sec)
+Records: 11  Duplicates: 0  Warnings: 0
+
+mysql> select * from student_data;
++----+----------+------------+-------+-----------+------------+
+| id | name     | department | marks | paid_fees | attendance |
++----+----------+------------+-------+-----------+------------+
+|  1 | krushna  | electrical |    90 |   1000000 |        100 |
+|  2 | sanket   | IT         |    45 |    121212 |         50 |
+|  3 | rajith   | CS         |    44 |     14256 |         55 |
+|  4 | Ram      | mechanical |    54 |     45126 |         84 |
+|  5 | mayur    | electrical |    86 |     25146 |         95 |
+|  6 | priyanka | CS         |    99 |     12451 |         75 |
+|  7 | sushant  | civil      |    87 |     12145 |         65 |
+|  8 | virendra | civil      |    56 |     14524 |         88 |
+|  9 | bassi    | mechanical |    45 |     45751 |         59 |
+| 10 | raone    | design     |    81 |     23152 |         49 |
+| 11 | naruto   | jutsu      |    10 |     15424 |         14 |
++----+----------+------------+-------+-----------+------------+
+11 rows in set (0.00 sec)
+
+mysql> select * from student_data where name like k%a;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '%a' at line 1
+mysql> select * from student_data where name like 'k%a';
++----+---------+------------+-------+-----------+------------+
+| id | name    | department | marks | paid_fees | attendance |
++----+---------+------------+-------+-----------+------------+
+|  1 | krushna | electrical |    90 |   1000000 |        100 |
++----+---------+------------+-------+-----------+------------+
+1 row in set (0.00 sec)
+
+mysql> select * from student_data where name '-a%h';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''-a%h'' at line 1
+mysql> select * from student_data where name like '-a%h';
+Empty set (0.00 sec)
+
+mysql> select * from student_data where name like '_a%h';
++----+--------+------------+-------+-----------+------------+
+| id | name   | department | marks | paid_fees | attendance |
++----+--------+------------+-------+-----------+------------+
+|  3 | rajith | CS         |    44 |     14256 |         55 |
++----+--------+------------+-------+-----------+------------+
+1 row in set (0.00 sec)
+
+mysql> select * from where name like R_m;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where name like R_m' at line 1
+mysql> select * from where name like 'R_m';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where name like 'R_m'' at line 1
+mysql> select * from student_data where name like 'R_m';
++----+------+------------+-------+-----------+------------+
+| id | name | department | marks | paid_fees | attendance |
++----+------+------------+-------+-----------+------------+
+|  4 | Ram  | mechanical |    54 |     45126 |         84 |
++----+------+------------+-------+-----------+------------+
+1 row in set (0.00 sec)
+
+mysql> select * from student_data where name like 'r____h';
++----+--------+------------+-------+-----------+------------+
+| id | name   | department | marks | paid_fees | attendance |
++----+--------+------------+-------+-----------+------------+
+|  3 | rajith | CS         |    44 |     14256 |         55 |
++----+--------+------------+-------+-----------+------------+
+1 row in set (0.00 sec)
+
+mysql> select * from student_data where name like 'R%';
++----+--------+------------+-------+-----------+------------+
+| id | name   | department | marks | paid_fees | attendance |
++----+--------+------------+-------+-----------+------------+
+|  3 | rajith | CS         |    44 |     14256 |         55 |
+|  4 | Ram    | mechanical |    54 |     45126 |         84 |
+| 10 | raone  | design     |    81 |     23152 |         49 |
++----+--------+------------+-------+-----------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from student_data where name like 'r%';
++----+--------+------------+-------+-----------+------------+
+| id | name   | department | marks | paid_fees | attendance |
++----+--------+------------+-------+-----------+------------+
+|  3 | rajith | CS         |    44 |     14256 |         55 |
+|  4 | Ram    | mechanical |    54 |     45126 |         84 |
+| 10 | raone  | design     |    81 |     23152 |         49 |
++----+--------+------------+-------+-----------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from student_data where name like 'r%'; --comment
++----+--------+------------+-------+-----------+------------+
+| id | name   | department | marks | paid_fees | attendance |
++----+--------+------------+-------+-----------+------------+
+|  3 | rajith | CS         |    44 |     14256 |         55 |
+|  4 | Ram    | mechanical |    54 |     45126 |         84 |
+| 10 | raone  | design     |    81 |     23152 |         49 |
++----+--------+------------+-------+-----------+------------+
+3 rows in set (0.00 sec)
+
+    -> select * from student_data where name like 'k%a'; --comment % is wildcard opoerator starting word % last word
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '--comment
+select * from student_data where name like 'k%a'' at line 1
+    -> select * from student_data where name like 'k%a'; --comment_%_is_wildcard_opoerator_starting_word_%_last_word
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '--comment % is wildcard opoerator starting word % last word
+select * from stude' at line 1
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '--comment_%_is_wildcard_opoerator_starting_word_%_last_word' at line 1
+mysql> select * from student_data where name like 'k%a';
++----+---------+------------+-------+-----------+------------+
+| id | name    | department | marks | paid_fees | attendance |
++----+---------+------------+-------+-----------+------------+
+|  1 | krushna | electrical |    90 |   1000000 |        100 |
++----+---------+------------+-------+-----------+------------+
+1 row in set (0.00 sec)
+
+mysql> select * from student_data where id in(4,5,1);
++----+---------+------------+-------+-----------+------------+
+| id | name    | department | marks | paid_fees | attendance |
++----+---------+------------+-------+-----------+------------+
+|  1 | krushna | electrical |    90 |   1000000 |        100 |
+|  4 | Ram     | mechanical |    54 |     45126 |         84 |
+|  5 | mayur   | electrical |    86 |     25146 |         95 |
++----+---------+------------+-------+-----------+------------+
+3 rows in set (0.01 sec)
+
+mysql> select * from student_data where id not in(4,5,1);
++----+----------+------------+-------+-----------+------------+
+| id | name     | department | marks | paid_fees | attendance |
++----+----------+------------+-------+-----------+------------+
+|  2 | sanket   | IT         |    45 |    121212 |         50 |
+|  3 | rajith   | CS         |    44 |     14256 |         55 |
+|  6 | priyanka | CS         |    99 |     12451 |         75 |
+|  7 | sushant  | civil      |    87 |     12145 |         65 |
+|  8 | virendra | civil      |    56 |     14524 |         88 |
+|  9 | bassi    | mechanical |    45 |     45751 |         59 |
+| 10 | raone    | design     |    81 |     23152 |         49 |
+| 11 | naruto   | jutsu      |    10 |     15424 |         14 |
++----+----------+------------+-------+-----------+------------+
+8 rows in set (0.00 sec)
+
+mysql> select * from student_data limit 5;
++----+---------+------------+-------+-----------+------------+
+| id | name    | department | marks | paid_fees | attendance |
++----+---------+------------+-------+-----------+------------+
+|  1 | krushna | electrical |    90 |   1000000 |        100 |
+|  2 | sanket  | IT         |    45 |    121212 |         50 |
+|  3 | rajith  | CS         |    44 |     14256 |         55 |
+|  4 | Ram     | mechanical |    54 |     45126 |         84 |
+|  5 | mayur   | electrical |    86 |     25146 |         95 |
++----+---------+------------+-------+-----------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from student_data limit (5,5);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(5,5)' at line 1
+mysql> select * from student_data limit (5,5);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(5,5)' at line 1
+mysql> select * from student_data limit 5,5;
++----+----------+------------+-------+-----------+------------+
+| id | name     | department | marks | paid_fees | attendance |
++----+----------+------------+-------+-----------+------------+
+|  6 | priyanka | CS         |    99 |     12451 |         75 |
+|  7 | sushant  | civil      |    87 |     12145 |         65 |
+|  8 | virendra | civil      |    56 |     14524 |         88 |
+|  9 | bassi    | mechanical |    45 |     45751 |         59 |
+| 10 | raone    | design     |    81 |     23152 |         49 |
++----+----------+------------+-------+-----------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from where paid_fees order by ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where paid_fees order by' at line 1
+mysql> select * from student_data where paid_fees order by ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> select * from student_data where paid_fees order by ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> select * from student_data where paid_fees order by ascd;
+ERROR 1054 (42S22): Unknown column 'ascd' in 'order clause'
+mysql> select * from student_data where paid_fees order by asce;
+ERROR 1054 (42S22): Unknown column 'asce' in 'order clause'
+mysql> select * from student_data where paid_fees order by asc;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'asc' at line 1
+mysql> select * from student_data where paid_fees order by desc;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'desc' at line 1
+mysql> select * from student_data  paid_fees order by desc;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'desc' at line 1
+mysql> select * from student_data  order by paid_fees  desc;
++----+----------+------------+-------+-----------+------------+
+| id | name     | department | marks | paid_fees | attendance |
++----+----------+------------+-------+-----------+------------+
+|  1 | krushna  | electrical |    90 |   1000000 |        100 |
+|  2 | sanket   | IT         |    45 |    121212 |         50 |
+|  9 | bassi    | mechanical |    45 |     45751 |         59 |
+|  4 | Ram      | mechanical |    54 |     45126 |         84 |
+|  5 | mayur    | electrical |    86 |     25146 |         95 |
+| 10 | raone    | design     |    81 |     23152 |         49 |
+| 11 | naruto   | jutsu      |    10 |     15424 |         14 |
+|  8 | virendra | civil      |    56 |     14524 |         88 |
+|  3 | rajith   | CS         |    44 |     14256 |         55 |
+|  6 | priyanka | CS         |    99 |     12451 |         75 |
+|  7 | sushant  | civil      |    87 |     12145 |         65 |
++----+----------+------------+-------+-----------+------------+
+11 rows in set (0.00 sec)
+
+mysql> select * from student_data  order by paid_fees;
++----+----------+------------+-------+-----------+------------+
+| id | name     | department | marks | paid_fees | attendance |
++----+----------+------------+-------+-----------+------------+
+|  7 | sushant  | civil      |    87 |     12145 |         65 |
+|  6 | priyanka | CS         |    99 |     12451 |         75 |
+|  3 | rajith   | CS         |    44 |     14256 |         55 |
+|  8 | virendra | civil      |    56 |     14524 |         88 |
+| 11 | naruto   | jutsu      |    10 |     15424 |         14 |
+| 10 | raone    | design     |    81 |     23152 |         49 |
+|  5 | mayur    | electrical |    86 |     25146 |         95 |
+|  4 | Ram      | mechanical |    54 |     45126 |         84 |
+|  9 | bassi    | mechanical |    45 |     45751 |         59 |
+|  2 | sanket   | IT         |    45 |    121212 |         50 |
+|  1 | krushna  | electrical |    90 |   1000000 |        100 |
++----+----------+------------+-------+-----------+------------+
+11 rows in set (0.00 sec)
+
+mysql> select * from student_data  order by paid_fees  desc;
++----+----------+------------+-------+-----------+------------+
+| id | name     | department | marks | paid_fees | attendance |
++----+----------+------------+-------+-----------+------------+
+|  1 | krushna  | electrical |    90 |   1000000 |        100 |
+|  2 | sanket   | IT         |    45 |    121212 |         50 |
+|  9 | bassi    | mechanical |    45 |     45751 |         59 |
+|  4 | Ram      | mechanical |    54 |     45126 |         84 |
+|  5 | mayur    | electrical |    86 |     25146 |         95 |
+| 10 | raone    | design     |    81 |     23152 |         49 |
+| 11 | naruto   | jutsu      |    10 |     15424 |         14 |
+|  8 | virendra | civil      |    56 |     14524 |         88 |
+|  3 | rajith   | CS         |    44 |     14256 |         55 |
+|  6 | priyanka | CS         |    99 |     12451 |         75 |
+|  7 | sushant  | civil      |    87 |     12145 |         65 |
++----+----------+------------+-------+-----------+------------+
+11 rows in set (0.00 sec)
+
+mysql> select * from student_data  order by paid_fees  desc limit 1;
++----+---------+------------+-------+-----------+------------+
+| id | name    | department | marks | paid_fees | attendance |
++----+---------+------------+-------+-----------+------------+
+|  1 | krushna | electrical |    90 |   1000000 |        100 |
++----+---------+------------+-------+-----------+------------+
+1 row in set (0.00 sec)
+
+mysql> select * from student_data  order by paid_fees  desc limit 1,1;
++----+--------+------------+-------+-----------+------------+
+| id | name   | department | marks | paid_fees | attendance |
++----+--------+------------+-------+-----------+------------+
+|  2 | sanket | IT         |    45 |    121212 |         50 |
++----+--------+------------+-------+-----------+------------+
+1 row in set (0.00 sec)
+
+mysql> select distinct paid_fees from student_data order by paid_fees;
++-----------+
+| paid_fees |
++-----------+
+|     12145 |
+|     12451 |
+|     14256 |
+|     14524 |
+|     15424 |
+|     23152 |
+|     25146 |
+|     45126 |
+|     45751 |
+|    121212 |
+|   1000000 |
++-----------+
+11 rows in set (0.01 sec)
+
+mysql> select distinct paid_fees from student_data order by paid_fees desc 1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1' at line 1
+mysql> select distinct paid_fees from student_data order by paid_fees desc ;
++-----------+
+| paid_fees |
++-----------+
+|   1000000 |
+|    121212 |
+|     45751 |
+|     45126 |
+|     25146 |
+|     23152 |
+|     15424 |
+|     14524 |
+|     14256 |
+|     12451 |
+|     12145 |
++-----------+
+11 rows in set (0.00 sec)
+
+mysql> select distinct paid_fees from student_data order by paid_fees desc limit 1;
++-----------+
+| paid_fees |
++-----------+
+|   1000000 |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> select distinct paid_fees from student_data order by paid_fees desc limit 1,1;
++-----------+
+| paid_fees |
++-----------+
+|    121212 |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> select distinct paid_fees as top_fees from student_data order by paid_fees desc limit 1;
++----------+
+| top_fees |
++----------+
+|  1000000 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select distinct paid_fees as lowest from student_data order by paid_fees;
++---------+
+| lowest  |
++---------+
+|   12145 |
+|   12451 |
+|   14256 |
+|   14524 |
+|   15424 |
+|   23152 |
+|   25146 |
+|   45126 |
+|   45751 |
+|  121212 |
+| 1000000 |
++---------+
+11 rows in set (0.00 sec)
+
+mysql> select distinct paid_fees as lowest from student_data order by paid_fees limit 1;
++--------+
+| lowest |
++--------+
+|  12145 |
++--------+
+1 row in set (0.00 sec)
+
+mysql> select * from student_data set paid_fees = paid_fees + (paid_fees * 0.15) where id in (2,4,6);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'set paid_fees = paid_fees + (paid_fees * 0.15) where id in (2,4,6)' at line 1
+mysql> update student_data set paid_fees = paid_fees + (paid_fees * 0.15) where id in (2,4,6);
+Query OK, 3 rows affected (0.01 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> select * from student_data;
++----+----------+------------+-------+-----------+------------+
+| id | name     | department | marks | paid_fees | attendance |
++----+----------+------------+-------+-----------+------------+
+|  1 | krushna  | electrical |    90 |   1000000 |        100 |
+|  2 | sanket   | IT         |    45 |    139394 |         50 |
+|  3 | rajith   | CS         |    44 |     14256 |         55 |
+|  4 | Ram      | mechanical |    54 |     51895 |         84 |
+|  5 | mayur    | electrical |    86 |     25146 |         95 |
+|  6 | priyanka | CS         |    99 |     14319 |         75 |
+|  7 | sushant  | civil      |    87 |     12145 |         65 |
+|  8 | virendra | civil      |    56 |     14524 |         88 |
+|  9 | bassi    | mechanical |    45 |     45751 |         59 |
+| 10 | raone    | design     |    81 |     23152 |         49 |
+| 11 | naruto   | jutsu      |    10 |     15424 |         14 |
++----+----------+------------+-------+-----------+------------+
+11 rows in set (0.00 sec)
+
+mysql>

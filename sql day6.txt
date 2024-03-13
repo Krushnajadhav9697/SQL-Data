@@ -1,0 +1,470 @@
+Microsoft Windows [Version 10.0.22631.3235]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Program Files\MySQL\MySQL Server 8.0\bin>mysql -u root -p -h localhist
+Enter password: *
+^C
+C:\Program Files\MySQL\MySQL Server 8.0\bin>
+C:\Program Files\MySQL\MySQL Server 8.0\bin>mysql -u root -p -h localhost
+Enter password: ***
+ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+
+C:\Program Files\MySQL\MySQL Server 8.0\bin>mysql -u root -p -h localhost
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 10
+Server version: 8.0.36 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use kj45;
+Database changed
+mysql> select * from student_data;
++----+----------+------------+-------+-----------+------------+
+| id | name     | department | marks | paid_fees | attendance |
++----+----------+------------+-------+-----------+------------+
+|  1 | krushna  | electrical |    90 |    100245 |         92 |
+|  2 | sanket   | IT         |    45 |    139394 |         50 |
+|  3 | rajith   | CS         |    44 |     14256 |         55 |
+|  4 | Ram      | mechanical |    54 |     51895 |         84 |
+|  5 | mayur    | electrical |    86 |     25146 |         95 |
+|  6 | priyanka | CS         |    99 |     14319 |         75 |
+|  7 | sushant  | civil      |    87 |     45751 |         65 |
+|  8 | virendra | civil      |    56 |     14524 |         88 |
+|  9 | bassi    | mechanical |    45 |     45751 |         59 |
+| 10 | raone    | design     |    81 |     45751 |         49 |
+| 11 | naruto   | jutsu      |    10 |     15424 |         14 |
+| 12 | keshav   | IT         |    68 |     45125 |         75 |
+| 13 | pritam   | Commerce   |    59 |     36544 |         77 |
++----+----------+------------+-------+-----------+------------+
+13 rows in set (0.01 sec)
+
+mysql> delete * from student_data where id in (12,13);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '* from student_data where id in (12,13)' at line 1
+mysql> delete from student_data where id in (12,13);
+Query OK, 2 rows affected (0.01 sec)
+
+mysql> select * form student_data;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'form student_data' at line 1
+mysql> select * from student_data;
++----+----------+------------+-------+-----------+------------+
+| id | name     | department | marks | paid_fees | attendance |
++----+----------+------------+-------+-----------+------------+
+|  1 | krushna  | electrical |    90 |    100245 |         92 |
+|  2 | sanket   | IT         |    45 |    139394 |         50 |
+|  3 | rajith   | CS         |    44 |     14256 |         55 |
+|  4 | Ram      | mechanical |    54 |     51895 |         84 |
+|  5 | mayur    | electrical |    86 |     25146 |         95 |
+|  6 | priyanka | CS         |    99 |     14319 |         75 |
+|  7 | sushant  | civil      |    87 |     45751 |         65 |
+|  8 | virendra | civil      |    56 |     14524 |         88 |
+|  9 | bassi    | mechanical |    45 |     45751 |         59 |
+| 10 | raone    | design     |    81 |     45751 |         49 |
+| 11 | naruto   | jutsu      |    10 |     15424 |         14 |
++----+----------+------------+-------+-----------+------------+
+11 rows in set (0.00 sec)
+
+mysql> alter table student_data rename column department as dept varchar(50) ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'as dept varchar(50)' at line 1
+mysql> alter table student_data rename column department to dept varchar(50) ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'varchar(50)' at line 1
+mysql> alter table student_data rename column department to dept  ;
+Query OK, 0 rows affected (0.08 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student_data;
++------------+-------------+------+-----+---------+----------------+
+| Field      | Type        | Null | Key | Default | Extra          |
++------------+-------------+------+-----+---------+----------------+
+| id         | int         | NO   | PRI | NULL    | auto_increment |
+| name       | varchar(50) | NO   |     | NULL    |                |
+| dept       | varchar(50) | NO   |     | NULL    |                |
+| marks      | float       | NO   |     | NULL    |                |
+| paid_fees  | bigint      | NO   |     | NULL    |                |
+| attendance | float       | NO   |     | NULL    |                |
++------------+-------------+------+-----+---------+----------------+
+6 rows in set (0.03 sec)
+
+mysql>  select * from student_data where id between 1 and 11;
++----+----------+------------+-------+-----------+------------+
+| id | name     | dept       | marks | paid_fees | attendance |
++----+----------+------------+-------+-----------+------------+
+|  1 | krushna  | electrical |    90 |    100245 |         92 |
+|  2 | sanket   | IT         |    45 |    139394 |         50 |
+|  3 | rajith   | CS         |    44 |     14256 |         55 |
+|  4 | Ram      | mechanical |    54 |     51895 |         84 |
+|  5 | mayur    | electrical |    86 |     25146 |         95 |
+|  6 | priyanka | CS         |    99 |     14319 |         75 |
+|  7 | sushant  | civil      |    87 |     45751 |         65 |
+|  8 | virendra | civil      |    56 |     14524 |         88 |
+|  9 | bassi    | mechanical |    45 |     45751 |         59 |
+| 10 | raone    | design     |    81 |     45751 |         49 |
+| 11 | naruto   | jutsu      |    10 |     15424 |         14 |
++----+----------+------------+-------+-----------+------------+
+11 rows in set (0.00 sec)
+
+mysql> select * from student_data where attendace between 70 and 100;
+ERROR 1054 (42S22): Unknown column 'attendace' in 'where clause'
+mysql> select * from student_data where attendance between 70 and 100;
++----+----------+------------+-------+-----------+------------+
+| id | name     | dept       | marks | paid_fees | attendance |
++----+----------+------------+-------+-----------+------------+
+|  1 | krushna  | electrical |    90 |    100245 |         92 |
+|  4 | Ram      | mechanical |    54 |     51895 |         84 |
+|  5 | mayur    | electrical |    86 |     25146 |         95 |
+|  6 | priyanka | CS         |    99 |     14319 |         75 |
+|  8 | virendra | civil      |    56 |     14524 |         88 |
++----+----------+------------+-------+-----------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from student_data where attendance>=75 and attendance <=95;
++----+----------+------------+-------+-----------+------------+
+| id | name     | dept       | marks | paid_fees | attendance |
++----+----------+------------+-------+-----------+------------+
+|  1 | krushna  | electrical |    90 |    100245 |         92 |
+|  4 | Ram      | mechanical |    54 |     51895 |         84 |
+|  5 | mayur    | electrical |    86 |     25146 |         95 |
+|  6 | priyanka | CS         |    99 |     14319 |         75 |
+|  8 | virendra | civil      |    56 |     14524 |         88 |
++----+----------+------------+-------+-----------+------------+
+5 rows in set (0.00 sec)
+
+mysql> create table table1(id int primary key,name varchar(50));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc table1;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int         | NO   | PRI | NULL    |       |
+| name  | varchar(50) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> create table table2(id int primary key,name varchar(52));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> alter table table1 drop index primary key;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'primary key' at line 1
+mysql> alter table table1 drop index id;
+ERROR 1091 (42000): Can't DROP 'id'; check that column/key exists
+mysql> insert into table1(id,name) values (1,'krushna'),(2,'rajith'),(3,'sanket');
+Query OK, 3 rows affected (0.00 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from table1;
++----+---------+
+| id | name    |
++----+---------+
+|  1 | krushna |
+|  2 | rajith  |
+|  3 | sanket  |
++----+---------+
+3 rows in set (0.00 sec)
+
+mysql> insert into table1(id,name) values(4,'kdambdi');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into table2(id,name)values(1,'bhuvan'),(2,'rajith'),(3,'mayur'),(4,'kdambdi');
+Query OK, 4 rows affected (0.01 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from table2 ;
++----+---------+
+| id | name    |
++----+---------+
+|  1 | bhuvan  |
+|  2 | rajith  |
+|  3 | mayur   |
+|  4 | kdambdi |
++----+---------+
+4 rows in set (0.00 sec)
+
+mysql> insert into table1(id,name)values(5,'sanket'),(6,'mortal');
+Query OK, 2 rows affected (0.01 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> insert into table2(id,name) values(5,'vadapav'),(6,'mortal');
+Query OK, 2 rows affected (0.01 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select * from table1 union select * from table2;
++----+---------+
+| id | name    |
++----+---------+
+|  1 | krushna |
+|  2 | rajith  |
+|  3 | sanket  |
+|  4 | kdambdi |
+|  5 | sanket  |
+|  6 | mortal  |
+|  1 | bhuvan  |
+|  3 | mayur   |
+|  5 | vadapav |
++----+---------+
+9 rows in set (0.01 sec)
+
+mysql> alter table table1 drop index id;
+ERROR 1091 (42000): Can't DROP 'id'; check that column/key exists
+mysql> alter table table1 drop index primary key;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'primary key' at line 1
+mysql> desc table1;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int         | NO   | PRI | NULL    |       |
+| name  | varchar(50) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> alter table table1 drop column index primary key;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'index primary key' at line 1
+mysql> alter table table1 drop column index id;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'index id' at line 1
+mysql> alter table table1 drop index id;
+ERROR 1091 (42000): Can't DROP 'id'; check that column/key exists
+mysql> alter table table1 drop primary key;
+Query OK, 6 rows affected (0.10 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+mysql> desc table1;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int         | NO   |     | NULL    |       |
+| name  | varchar(50) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * form table1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'form table1' at line 1
+mysql> select * from table1;
++----+---------+
+| id | name    |
++----+---------+
+|  1 | krushna |
+|  2 | rajith  |
+|  3 | sanket  |
+|  4 | kdambdi |
+|  5 | sanket  |
+|  6 | mortal  |
++----+---------+
+6 rows in set (0.00 sec)
+
+mysql> insert  into table1 values (3,'sanket'),(2,'rajith');
+Query OK, 2 rows affected (0.01 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select * from table1 union select * from table2;
++----+---------+
+| id | name    |
++----+---------+
+|  1 | krushna |
+|  2 | rajith  |
+|  3 | sanket  |
+|  4 | kdambdi |
+|  5 | sanket  |
+|  6 | mortal  |
+|  1 | bhuvan  |
+|  3 | mayur   |
+|  5 | vadapav |
++----+---------+
+9 rows in set (0.00 sec)
+
+mysql> select * from table1;
++----+---------+
+| id | name    |
++----+---------+
+|  1 | krushna |
+|  2 | rajith  |
+|  3 | sanket  |
+|  4 | kdambdi |
+|  5 | sanket  |
+|  6 | mortal  |
+|  3 | sanket  |
+|  2 | rajith  |
++----+---------+
+8 rows in set (0.00 sec)
+
+mysql> select * from table2;
++----+---------+
+| id | name    |
++----+---------+
+|  1 | bhuvan  |
+|  2 | rajith  |
+|  3 | mayur   |
+|  4 | kdambdi |
+|  5 | vadapav |
+|  6 | mortal  |
++----+---------+
+6 rows in set (0.00 sec)
+
+mysql> select * from table1 union all select * from table2;
++----+---------+
+| id | name    |
++----+---------+
+|  1 | krushna |
+|  2 | rajith  |
+|  3 | sanket  |
+|  4 | kdambdi |
+|  5 | sanket  |
+|  6 | mortal  |
+|  3 | sanket  |
+|  2 | rajith  |
+|  1 | bhuvan  |
+|  2 | rajith  |
+|  3 | mayur   |
+|  4 | kdambdi |
+|  5 | vadapav |
+|  6 | mortal  |
++----+---------+
+14 rows in set (0.00 sec)
+
+mysql> select * from table1 except select * from table2;
++----+---------+
+| id | name    |
++----+---------+
+|  1 | krushna |
+|  3 | sanket  |
+|  5 | sanket  |
++----+---------+
+3 rows in set (0.00 sec)
+
+mysql> select * from table1 intersect select * form table2;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'form table2' at line 1
+mysql> select * from table1 intersect select * from table2;
++----+---------+
+| id | name    |
++----+---------+
+|  2 | rajith  |
+|  4 | kdambdi |
+|  6 | mortal  |
++----+---------+
+3 rows in set (0.00 sec)
+
+mysql> show tables;
++----------------+
+| Tables_in_kj45 |
++----------------+
+| collage        |
+| my             |
+| student        |
+| student_data   |
+| table1         |
+| table2         |
++----------------+
+6 rows in set (0.00 sec)
+
+mysql> desc collage;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| rollno   | int         | NO   | PRI | NULL    | auto_increment |
+| f_name   | varchar(20) | NO   |     | NULL    |                |
+| city     | varchar(50) | NO   |     | NULL    |                |
+| city_pin | bigint      | NO   |     | NULL    |                |
+| course   | varchar(20) | NO   |     | NULL    |                |
+| age      | int         | NO   |     | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
+6 rows in set (0.01 sec)
+
+mysql> desc student_data;
++------------+-------------+------+-----+---------+----------------+
+| Field      | Type        | Null | Key | Default | Extra          |
++------------+-------------+------+-----+---------+----------------+
+| id         | int         | NO   | PRI | NULL    | auto_increment |
+| name       | varchar(50) | NO   |     | NULL    |                |
+| dept       | varchar(50) | NO   |     | NULL    |                |
+| marks      | float       | NO   |     | NULL    |                |
+| paid_fees  | bigint      | NO   |     | NULL    |                |
+| attendance | float       | NO   |     | NULL    |                |
++------------+-------------+------+-----+---------+----------------+
+6 rows in set (0.01 sec)
+
+mysql> select * from srudent_data group by dept;
+ERROR 1146 (42S02): Table 'kj45.srudent_data' doesn't exist
+mysql> select * from student_data group by dept;
+ERROR 1055 (42000): Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'kj45.student_data.id' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+mysql> select count(id) from srudent_data group by dept;
+ERROR 1146 (42S02): Table 'kj45.srudent_data' doesn't exist
+mysql> select count(id) from student_data group by dept;
++-----------+
+| count(id) |
++-----------+
+|         2 |
+|         1 |
+|         2 |
+|         2 |
+|         2 |
+|         1 |
+|         1 |
++-----------+
+7 rows in set (0.00 sec)
+
+mysql> select dept,count(id) from student_data group by dept;
++------------+-----------+
+| dept       | count(id) |
++------------+-----------+
+| electrical |         2 |
+| IT         |         1 |
+| CS         |         2 |
+| mechanical |         2 |
+| civil      |         2 |
+| design     |         1 |
+| jutsu      |         1 |
++------------+-----------+
+7 rows in set (0.00 sec)
+
+mysql> select dept,count(id) from student_data group by dept having max(4);
++------------+-----------+
+| dept       | count(id) |
++------------+-----------+
+| electrical |         2 |
+| IT         |         1 |
+| CS         |         2 |
+| mechanical |         2 |
+| civil      |         2 |
+| design     |         1 |
+| jutsu      |         1 |
++------------+-----------+
+7 rows in set (0.01 sec)
+
+mysql> select dept,count(id) from student_data group by dept having max(marks);
++------------+-----------+
+| dept       | count(id) |
++------------+-----------+
+| electrical |         2 |
+| IT         |         1 |
+| CS         |         2 |
+| mechanical |         2 |
+| civil      |         2 |
+| design     |         1 |
+| jutsu      |         1 |
++------------+-----------+
+7 rows in set (0.00 sec)
+
+mysql> select * from student_data;
++----+----------+------------+-------+-----------+------------+
+| id | name     | dept       | marks | paid_fees | attendance |
++----+----------+------------+-------+-----------+------------+
+|  1 | krushna  | electrical |    90 |    100245 |         92 |
+|  2 | sanket   | IT         |    45 |    139394 |         50 |
+|  3 | rajith   | CS         |    44 |     14256 |         55 |
+|  4 | Ram      | mechanical |    54 |     51895 |         84 |
+|  5 | mayur    | electrical |    86 |     25146 |         95 |
+|  6 | priyanka | CS         |    99 |     14319 |         75 |
+|  7 | sushant  | civil      |    87 |     45751 |         65 |
+|  8 | virendra | civil      |    56 |     14524 |         88 |
+|  9 | bassi    | mechanical |    45 |     45751 |         59 |
+| 10 | raone    | design     |    81 |     45751 |         49 |
+| 11 | naruto   | jutsu      |    10 |     15424 |         14 |
++----+----------+------------+-------+-----------+------------+
+11 rows in set (0.00 sec)
+
+mysql>
