@@ -1,0 +1,470 @@
+Microsoft Windows [Version 10.0.22631.3296]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Program Files\MySQL\MySQL Server 8.0\bin>mysql -u root -p -h localhost
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 9
+Server version: 8.0.36 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> REM Built In FUnctions
+    -> 1 String Functions
+    -> ^C
+mysql>
+mysql> 1 lower() ^C
+mysql> lower used to convert all words charecters into small case
+    -> eg value enter RaM o/p of lower(RaM) will be ram ^C
+mysql>
+mysql> select lower(RaM)
+    -> ;
+ERROR 1054 (42S22): Unknown column 'RaM' in 'field list'
+mysql> use kj45;
+Database changed
+mysql> select lower(RAm)
+    -> ;
+ERROR 1054 (42S22): Unknown column 'RAm' in 'field list'
+mysql> select * from student_data
+    -> ;
++----+----------+------------+-------+-----------+------------+
+| id | name     | dept       | marks | paid_fees | attendance |
++----+----------+------------+-------+-----------+------------+
+|  1 | krushna  | electrical |    90 |    100245 |         92 |
+|  2 | sanket   | IT         |    45 |    139394 |         50 |
+|  3 | rajith   | CS         |    44 |     14256 |         55 |
+|  4 | Ram      | mechanical |    54 |     51895 |         84 |
+|  5 | mayur    | electrical |    86 |     25146 |         95 |
+|  6 | priyanka | CS         |    99 |     14319 |         75 |
+|  7 | sushant  | civil      |    87 |     45751 |         65 |
+|  8 | virendra | civil      |    56 |     14524 |         88 |
+|  9 | bassi    | mechanical |    45 |     45751 |         59 |
+| 10 | raone    | design     |    81 |     45751 |         49 |
+| 11 | naruto   | jutsu      |    10 |     15424 |         66 |
++----+----------+------------+-------+-----------+------------+
+11 rows in set (0.09 sec)
+
+mysql> select id,lower(name),attendance from student_data ;
++----+-------------+------------+
+| id | lower(name) | attendance |
++----+-------------+------------+
+|  1 | krushna     |         92 |
+|  2 | sanket      |         50 |
+|  3 | rajith      |         55 |
+|  4 | ram         |         84 |
+|  5 | mayur       |         95 |
+|  6 | priyanka    |         75 |
+|  7 | sushant     |         65 |
+|  8 | virendra    |         88 |
+|  9 | bassi       |         59 |
+| 10 | raone       |         49 |
+| 11 | naruto      |         66 |
++----+-------------+------------+
+11 rows in set (0.00 sec)
+
+mysql> 2 upper convert all char into upper case
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '2 upper convert all char into upper case' at line 1
+mysql> select upper(name),marks from student_data ;
++-------------+-------+
+| upper(name) | marks |
++-------------+-------+
+| KRUSHNA     |    90 |
+| SANKET      |    45 |
+| RAJITH      |    44 |
+| RAM         |    54 |
+| MAYUR       |    86 |
+| PRIYANKA    |    99 |
+| SUSHANT     |    87 |
+| VIRENDRA    |    56 |
+| BASSI       |    45 |
+| RAONE       |    81 |
+| NARUTO      |    10 |
++-------------+-------+
+11 rows in set (0.01 sec)
+
+mysql> alter table student_data add column l_name varchar(50) not null after name;
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from student_data;
++----+----------+--------+------------+-------+-----------+------------+
+| id | name     | l_name | dept       | marks | paid_fees | attendance |
++----+----------+--------+------------+-------+-----------+------------+
+|  1 | krushna  |        | electrical |    90 |    100245 |         92 |
+|  2 | sanket   |        | IT         |    45 |    139394 |         50 |
+|  3 | rajith   |        | CS         |    44 |     14256 |         55 |
+|  4 | Ram      |        | mechanical |    54 |     51895 |         84 |
+|  5 | mayur    |        | electrical |    86 |     25146 |         95 |
+|  6 | priyanka |        | CS         |    99 |     14319 |         75 |
+|  7 | sushant  |        | civil      |    87 |     45751 |         65 |
+|  8 | virendra |        | civil      |    56 |     14524 |         88 |
+|  9 | bassi    |        | mechanical |    45 |     45751 |         59 |
+| 10 | raone    |        | design     |    81 |     45751 |         49 |
+| 11 | naruto   |        | jutsu      |    10 |     15424 |         66 |
++----+----------+--------+------------+-------+-----------+------------+
+11 rows in set (0.00 sec)
+
+mysql> alter table student_data modify l_name varchar(50) default 'mumbai';
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from student_data;
++----+----------+--------+------------+-------+-----------+------------+
+| id | name     | l_name | dept       | marks | paid_fees | attendance |
++----+----------+--------+------------+-------+-----------+------------+
+|  1 | krushna  |        | electrical |    90 |    100245 |         92 |
+|  2 | sanket   |        | IT         |    45 |    139394 |         50 |
+|  3 | rajith   |        | CS         |    44 |     14256 |         55 |
+|  4 | Ram      |        | mechanical |    54 |     51895 |         84 |
+|  5 | mayur    |        | electrical |    86 |     25146 |         95 |
+|  6 | priyanka |        | CS         |    99 |     14319 |         75 |
+|  7 | sushant  |        | civil      |    87 |     45751 |         65 |
+|  8 | virendra |        | civil      |    56 |     14524 |         88 |
+|  9 | bassi    |        | mechanical |    45 |     45751 |         59 |
+| 10 | raone    |        | design     |    81 |     45751 |         49 |
+| 11 | naruto   |        | jutsu      |    10 |     15424 |         66 |
++----+----------+--------+------------+-------+-----------+------------+
+11 rows in set (0.00 sec)
+
+mysql> update student_Data set l_name = 'jadhav';
+Query OK, 11 rows affected (0.24 sec)
+Rows matched: 11  Changed: 11  Warnings: 0
+
+mysql> select * from student_data;
++----+----------+--------+------------+-------+-----------+------------+
+| id | name     | l_name | dept       | marks | paid_fees | attendance |
++----+----------+--------+------------+-------+-----------+------------+
+|  1 | krushna  | jadhav | electrical |    90 |    100245 |         92 |
+|  2 | sanket   | jadhav | IT         |    45 |    139394 |         50 |
+|  3 | rajith   | jadhav | CS         |    44 |     14256 |         55 |
+|  4 | Ram      | jadhav | mechanical |    54 |     51895 |         84 |
+|  5 | mayur    | jadhav | electrical |    86 |     25146 |         95 |
+|  6 | priyanka | jadhav | CS         |    99 |     14319 |         75 |
+|  7 | sushant  | jadhav | civil      |    87 |     45751 |         65 |
+|  8 | virendra | jadhav | civil      |    56 |     14524 |         88 |
+|  9 | bassi    | jadhav | mechanical |    45 |     45751 |         59 |
+| 10 | raone    | jadhav | design     |    81 |     45751 |         49 |
+| 11 | naruto   | jadhav | jutsu      |    10 |     15424 |         66 |
++----+----------+--------+------------+-------+-----------+------------+
+11 rows in set (0.00 sec)
+
+mysql> 3 concat merge two or more columns^C
+mysql>
+mysql> select id,concat(name,' ',l_name) from student_data;
++----+-------------------------+
+| id | concat(name,' ',l_name) |
++----+-------------------------+
+|  1 | krushna jadhav          |
+|  2 | sanket jadhav           |
+|  3 | rajith jadhav           |
+|  4 | Ram jadhav              |
+|  5 | mayur jadhav            |
+|  6 | priyanka jadhav         |
+|  7 | sushant jadhav          |
+|  8 | virendra jadhav         |
+|  9 | bassi jadhav            |
+| 10 | raone jadhav            |
+| 11 | naruto jadhav           |
++----+-------------------------+
+11 rows in set (0.00 sec)
+
+mysql> select id,concat(name,' ',l_name) as full_name from student_data;
++----+-----------------+
+| id | full_name       |
++----+-----------------+
+|  1 | krushna jadhav  |
+|  2 | sanket jadhav   |
+|  3 | rajith jadhav   |
+|  4 | Ram jadhav      |
+|  5 | mayur jadhav    |
+|  6 | priyanka jadhav |
+|  7 | sushant jadhav  |
+|  8 | virendra jadhav |
+|  9 | bassi jadhav    |
+| 10 | raone jadhav    |
+| 11 | naruto jadhav   |
++----+-----------------+
+11 rows in set (0.01 sec)
+
+mysql> select id,upper(concat(name,' ',l_name)) from student_data;
++----+--------------------------------+
+| id | upper(concat(name,' ',l_name)) |
++----+--------------------------------+
+|  1 | KRUSHNA JADHAV                 |
+|  2 | SANKET JADHAV                  |
+|  3 | RAJITH JADHAV                  |
+|  4 | RAM JADHAV                     |
+|  5 | MAYUR JADHAV                   |
+|  6 | PRIYANKA JADHAV                |
+|  7 | SUSHANT JADHAV                 |
+|  8 | VIRENDRA JADHAV                |
+|  9 | BASSI JADHAV                   |
+| 10 | RAONE JADHAV                   |
+| 11 | NARUTO JADHAV                  |
++----+--------------------------------+
+11 rows in set (0.00 sec)
+
+mysql> select id,ucase(concat(name,' ',l_name)) from student_data;
++----+--------------------------------+
+| id | ucase(concat(name,' ',l_name)) |
++----+--------------------------------+
+|  1 | KRUSHNA JADHAV                 |
+|  2 | SANKET JADHAV                  |
+|  3 | RAJITH JADHAV                  |
+|  4 | RAM JADHAV                     |
+|  5 | MAYUR JADHAV                   |
+|  6 | PRIYANKA JADHAV                |
+|  7 | SUSHANT JADHAV                 |
+|  8 | VIRENDRA JADHAV                |
+|  9 | BASSI JADHAV                   |
+| 10 | RAONE JADHAV                   |
+| 11 | NARUTO JADHAV                  |
++----+--------------------------------+
+11 rows in set (0.00 sec)
+
+mysql> select id ,name,length(name) from student_data ;
++----+----------+--------------+
+| id | name     | length(name) |
++----+----------+--------------+
+|  1 | krushna  |            7 |
+|  2 | sanket   |            6 |
+|  3 | rajith   |            6 |
+|  4 | Ram      |            3 |
+|  5 | mayur    |            5 |
+|  6 | priyanka |            8 |
+|  7 | sushant  |            7 |
+|  8 | virendra |            8 |
+|  9 | bassi    |            5 |
+| 10 | raone    |            5 |
+| 11 | naruto   |            6 |
++----+----------+--------------+
+11 rows in set (0.01 sec)
+
+mysql> select trim('    krushna    ');
++-------------------------+
+| trim('    krushna    ') |
++-------------------------+
+| krushna                 |
++-------------------------+
+1 row in set (0.01 sec)
+
+mysql> trim remove the space on both side if string ^C
+mysql>
+mysql> select trim('   k    kru    m     ');
++-------------------------------+
+| trim('   k    kru    m     ') |
++-------------------------------+
+| k    kru    m                 |
++-------------------------------+
+1 row in set (0.00 sec)
+
+mysql> there are 2 type of trim ltrim(left trim) remove left side of sapce and rtrim(right trim) remove right side of space^C
+mysql>
+mysql> select ltrim('   kru    ');
++---------------------+
+| ltrim('   kru    ') |
++---------------------+
+| kru                 |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> select lenght(ltrim('   kru    '));
+ERROR 1305 (42000): FUNCTION kj45.lenght does not exist
+mysql> select length(ltrim('   kru    '));
++-----------------------------+
+| length(ltrim('   kru    ')) |
++-----------------------------+
+|                           7 |
++-----------------------------+
+1 row in set (0.00 sec)
+
+mysql> there are 4 space given after kru --> ltrim removes all space on left side not right side hence length is 7  ^C
+mysql>
+mysql> select rtrim('    kru    ');
++----------------------+
+| rtrim('    kru    ') |
++----------------------+
+|     kru              |
++----------------------+
+1 row in set (0.01 sec)
+
+mysql> select length(rtrim('     kru    '));
++-------------------------------+
+| length(rtrim('     kru    ')) |
++-------------------------------+
+|                             8 |
++-------------------------------+
+1 row in set (0.00 sec)
+
+mysql> 5 space given on right side ltrim removes left side space hence length is 8  ^C
+mysql>
+mysql> replace() --> can replece the word ^C
+mysql>
+mysql> select replace('salman kapur','kapur','khan');
++----------------------------------------+
+| replace('salman kapur','kapur','khan') |
++----------------------------------------+
+| salman khan                            |
++----------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> replace( original string , the word u want to replace , new word)  ^C
+mysql>
+mysql> select replace('krusqna','q','h');
++----------------------------+
+| replace('krusqna','q','h') |
++----------------------------+
+| krushna                    |
++----------------------------+
+1 row in set (0.00 sec)
+
+mysql> select replace ('i am from ambernath ','a','w');
++------------------------------------------+
+| replace ('i am from ambernath ','a','w') |
++------------------------------------------+
+| i wm from wmbernwth                      |
++------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> if there are 2 or more word or cherecter u want to replace  they all will get replaced
+    -> ^C
+mysql>
+mysql>
+mysql> math ^C
+mysql>
+mysql> abs --> convert the -ve value to +ve ^C
+mysql>
+mysql> select abs(-5) ;
++---------+
+| abs(-5) |
++---------+
+|       5 |
++---------+
+1 row in set (0.01 sec)
+
+mysql> ceil --> if there is decimal or floating point value in range of x.1 to x.9 it will take next value eg for 10.1 and 10.9 it will take 11 1 fro x.00 i
+t will take x ^C
+mysql>
+mysql> select ceil(10.1);
++------------+
+| ceil(10.1) |
++------------+
+|         11 |
++------------+
+1 row in set (0.01 sec)
+
+mysql> select ceil(10.9);
++------------+
+| ceil(10.9) |
++------------+
+|         11 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select ceil(10.00);
++-------------+
+| ceil(10.00) |
++-------------+
+|          10 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> round()--> for floating point value in range of x.0 to x.5 it will take x and for range x.5 to x.9 it will take next value ^C
+mysql> eg for 10.0 to 10.4 take 10 and 10.5 to 10.9 take  11 ^C
+mysql>
+mysql> select round(10.1);
++-------------+
+| round(10.1) |
++-------------+
+|          10 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select round(10.5);
++-------------+
+| round(10.5) |
++-------------+
+|          11 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select round(10.5,10.9);
++------------------+
+| round(10.5,10.9) |
++------------------+
+|             10.5 |
++------------------+
+1 row in set (0.00 sec)
+
+mysql> select round(10.9);
++-------------+
+| round(10.9) |
++-------------+
+|          11 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> truncate() --> it take 2 parameter its used to display how meny values u want to display after point eg truncate(10.121522544,2) o/p will be 10.12 it
+ will show 2 value after point ^C
+mysql>
+mysql> selct truncate(54.215214,3);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'selct truncate(54.215214,3)' at line 1
+mysql> select truncate(54.215214,3);
++-----------------------+
+| truncate(54.215214,3) |
++-----------------------+
+|                54.215 |
++-----------------------+
+1 row in set (0.00 sec)
+
+mysql> select truncate(54.215214,2);
++-----------------------+
+| truncate(54.215214,2) |
++-----------------------+
+|                 54.21 |
++-----------------------+
+1 row in set (0.00 sec)
+
+mysql>   mod()--> its like modulas its return remainder^C
+mysql>
+mysql> select mod(5/2);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+mysql> select mod(5,2);
++----------+
+| mod(5,2) |
++----------+
+|        1 |
++----------+
+1 row in set (0.01 sec)
+
+mysql> select mod(10,5);
++-----------+
+| mod(10,5) |
++-----------+
+|         0 |
++-----------+
+1 row in set (0.00 sec)
+
+mysql>  floor() --> its show the value before poinyt eg 40.25451 o/p will be 40 only  ^C
+mysql>
+mysql>
+mysql> selct floor(10,9);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'selct floor(10,9)' at line 1
+mysql> select floor(10,9);
+ERROR 1582 (42000): Incorrect parameter count in the call to native function 'floor'
+mysql> select floor(10.9);
++-------------+
+| floor(10.9) |
++-------------+
+|          10 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql>

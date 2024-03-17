@@ -1,0 +1,548 @@
+Microsoft Windows [Version 10.0.22631.3296]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Program Files\MySQL\MySQL Server 8.0\bin>mysql -u root -p -h localhost
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.36 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use kj45;
+Database changed
+mysql> show tables;
++----------------+
+| Tables_in_kj45 |
++----------------+
+| collage        |
+| my             |
+| student        |
+| student_data   |
+| table1         |
+| table2         |
++----------------+
+6 rows in set (0.08 sec)
+
+mysql> selct * from student_data;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'selct * from student_data' at line 1
+mysql> select * from student_data;
++----+----------+--------+------------+-------+-----------+------------+
+| id | name     | l_name | dept       | marks | paid_fees | attendance |
++----+----------+--------+------------+-------+-----------+------------+
+|  1 | krushna  | jadhav | electrical |    90 |    100245 |         92 |
+|  2 | sanket   | jadhav | IT         |    45 |    139394 |         50 |
+|  3 | rajith   | jadhav | CS         |    44 |     14256 |         55 |
+|  4 | Ram      | jadhav | mechanical |    54 |     51895 |         84 |
+|  5 | mayur    | jadhav | electrical |    86 |     25146 |         95 |
+|  6 | priyanka | jadhav | CS         |    99 |     14319 |         75 |
+|  7 | sushant  | jadhav | civil      |    87 |     45751 |         65 |
+|  8 | virendra | jadhav | civil      |    56 |     14524 |         88 |
+|  9 | bassi    | jadhav | mechanical |    45 |     45751 |         59 |
+| 10 | raone    | jadhav | design     |    81 |     45751 |         49 |
+| 11 | naruto   | jadhav | jutsu      |    10 |     15424 |         66 |
++----+----------+--------+------------+-------+-----------+------------+
+11 rows in set (0.01 sec)
+
+mysql> select concat(name,l_name) from student_data;
++---------------------+
+| concat(name,l_name) |
++---------------------+
+| krushnajadhav       |
+| sanketjadhav        |
+| rajithjadhav        |
+| Ramjadhav           |
+| mayurjadhav         |
+| priyankajadhav      |
+| sushantjadhav       |
+| virendrajadhav      |
+| bassijadhav         |
+| raonejadhav         |
+| narutojadhav        |
++---------------------+
+11 rows in set (0.00 sec)
+
+mysql> select concat(name,' ',l_name) from student_data;
++-------------------------+
+| concat(name,' ',l_name) |
++-------------------------+
+| krushna jadhav          |
+| sanket jadhav           |
+| rajith jadhav           |
+| Ram jadhav              |
+| mayur jadhav            |
+| priyanka jadhav         |
+| sushant jadhav          |
+| virendra jadhav         |
+| bassi jadhav            |
+| raone jadhav            |
+| naruto jadhav           |
++-------------------------+
+11 rows in set (0.00 sec)
+
+mysql> select replace('krushna kam','kam','jadhav') from student_data;
++---------------------------------------+
+| replace('krushna kam','kam','jadhav') |
++---------------------------------------+
+| krushna jadhav                        |
+| krushna jadhav                        |
+| krushna jadhav                        |
+| krushna jadhav                        |
+| krushna jadhav                        |
+| krushna jadhav                        |
+| krushna jadhav                        |
+| krushna jadhav                        |
+| krushna jadhav                        |
+| krushna jadhav                        |
+| krushna jadhav                        |
++---------------------------------------+
+11 rows in set (0.00 sec)
+
+mysql> select replace('krushna kam','kam','jadhav') ;
++---------------------------------------+
+| replace('krushna kam','kam','jadhav') |
++---------------------------------------+
+| krushna jadhav                        |
++---------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select * from student_data ;
++----+----------+--------+------------+-------+-----------+------------+
+| id | name     | l_name | dept       | marks | paid_fees | attendance |
++----+----------+--------+------------+-------+-----------+------------+
+|  1 | krushna  | jadhav | electrical |    90 |    100245 |         92 |
+|  2 | sanket   | jadhav | IT         |    45 |    139394 |         50 |
+|  3 | rajith   | jadhav | CS         |    44 |     14256 |         55 |
+|  4 | Ram      | jadhav | mechanical |    54 |     51895 |         84 |
+|  5 | mayur    | jadhav | electrical |    86 |     25146 |         95 |
+|  6 | priyanka | jadhav | CS         |    99 |     14319 |         75 |
+|  7 | sushant  | jadhav | civil      |    87 |     45751 |         65 |
+|  8 | virendra | jadhav | civil      |    56 |     14524 |         88 |
+|  9 | bassi    | jadhav | mechanical |    45 |     45751 |         59 |
+| 10 | raone    | jadhav | design     |    81 |     45751 |         49 |
+| 11 | naruto   | jadhav | jutsu      |    10 |     15424 |         66 |
++----+----------+--------+------------+-------+-----------+------------+
+11 rows in set (0.00 sec)
+
+mysql>  arithmatic function    ^C
+mysql>
+mysql> 1.absolute
+    -> abs()   ^C
+mysql>
+mysql> select abs(-30);
++----------+
+| abs(-30) |
++----------+
+|       30 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> abs--> convert negative value to positive value
+    ->
+    -> ^C
+mysql>
+mysql> select abs(-3.3);
++-----------+
+| abs(-3.3) |
++-----------+
+|       3.3 |
++-----------+
+1 row in set (0.02 sec)
+
+mysql> ceiling --> cail() --> take upper value x.1 to x.99 = x+1 eg for 10.01 to 10.99 = 11 ^C
+mysql>
+mysql> select ceil(10.01);
++-------------+
+| ceil(10.01) |
++-------------+
+|          11 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select ceil(10.99);
++-------------+
+| ceil(10.99) |
++-------------+
+|          11 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> round()--> take lower value for range x.0 to x.49 eg 10.00 to 10.49 =10 and 10.50 to 10.99=11   ^C
+mysql>
+mysql>
+mysql> select round(10.01);
++--------------+
+| round(10.01) |
++--------------+
+|           10 |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> select round(10.49);
++--------------+
+| round(10.49) |
++--------------+
+|           10 |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> select round(10.99);
++--------------+
+| round(10.99) |
++--------------+
+|           11 |
++--------------+
+1 row in set (0.00 sec)
+
+mysql>
+mysql> truncate _--> used to display the value after point  ^C
+mysql>
+mysql> select truncate(10.24415,2);
++----------------------+
+| truncate(10.24415,2) |
++----------------------+
+|                10.24 |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql> select truncate(10.24415,5);
++----------------------+
+| truncate(10.24415,5) |
++----------------------+
+|             10.24415 |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql> select truncate(10.24415,5.8);
++------------------------+
+| truncate(10.24415,5.8) |
++------------------------+
+|               10.24415 |
++------------------------+
+1 row in set (0.00 sec)
+
+mysql> select truncate(10.244154,5.8);
++-------------------------+
+| truncate(10.244154,5.8) |
++-------------------------+
+|               10.244154 |
++-------------------------+
+1 row in set (0.00 sec)
+
+mysql>   5.8 taken as 7   like round() method  ^C
+mysql>
+mysql> select mod(4,2);
++----------+
+| mod(4,2) |
++----------+
+|        0 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select mod(3,2);
++----------+
+| mod(3,2) |
++----------+
+|        1 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select floor(4/2);
++------------+
+| floor(4/2) |
++------------+
+|          2 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select floor(4/3);
++------------+
+| floor(4/3) |
++------------+
+|          1 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> pow can used to power value
+    -> ^C
+mysql>
+mysql> select pow(4,4);
++----------+
+| pow(4,4) |
++----------+
+|      256 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> 4 res to 4 = 256   ^C
+mysql>
+mysql>
+mysql> squart root (sqrt) --> used to take square root ^C
+mysql>
+mysql>
+mysql> select sqrt(2,2);
+ERROR 1582 (42000): Incorrect parameter count in the call to native function 'sqrt'
+mysql> select sqrt(2);
++--------------------+
+| sqrt(2)            |
++--------------------+
+| 1.4142135623730951 |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> select sqrt(4);
++---------+
+| sqrt(4) |
++---------+
+|       2 |
++---------+
+1 row in set (0.00 sec)
+
+mysql> select sqrt(25);
++----------+
+| sqrt(25) |
++----------+
+|        5 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select * from student_data;
++----+----------+--------+------------+-------+-----------+------------+
+| id | name     | l_name | dept       | marks | paid_fees | attendance |
++----+----------+--------+------------+-------+-----------+------------+
+|  1 | krushna  | jadhav | electrical |    90 |    100245 |         92 |
+|  2 | sanket   | jadhav | IT         |    45 |    139394 |         50 |
+|  3 | rajith   | jadhav | CS         |    44 |     14256 |         55 |
+|  4 | Ram      | jadhav | mechanical |    54 |     51895 |         84 |
+|  5 | mayur    | jadhav | electrical |    86 |     25146 |         95 |
+|  6 | priyanka | jadhav | CS         |    99 |     14319 |         75 |
+|  7 | sushant  | jadhav | civil      |    87 |     45751 |         65 |
+|  8 | virendra | jadhav | civil      |    56 |     14524 |         88 |
+|  9 | bassi    | jadhav | mechanical |    45 |     45751 |         59 |
+| 10 | raone    | jadhav | design     |    81 |     45751 |         49 |
+| 11 | naruto   | jadhav | jutsu      |    10 |     15424 |         66 |
++----+----------+--------+------------+-------+-----------+------------+
+11 rows in set (0.00 sec)
+
+mysql> select upper(name),pow(marks,2) from student_data where id=11;
++-------------+--------------+
+| upper(name) | pow(marks,2) |
++-------------+--------------+
+| NARUTO      |          100 |
++-------------+--------------+
+1 row in set (0.01 sec)
+
+mysql> update student_data set marks = pow(marks,2) where id=11;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from student_data;
++----+----------+--------+------------+-------+-----------+------------+
+| id | name     | l_name | dept       | marks | paid_fees | attendance |
++----+----------+--------+------------+-------+-----------+------------+
+|  1 | krushna  | jadhav | electrical |    90 |    100245 |         92 |
+|  2 | sanket   | jadhav | IT         |    45 |    139394 |         50 |
+|  3 | rajith   | jadhav | CS         |    44 |     14256 |         55 |
+|  4 | Ram      | jadhav | mechanical |    54 |     51895 |         84 |
+|  5 | mayur    | jadhav | electrical |    86 |     25146 |         95 |
+|  6 | priyanka | jadhav | CS         |    99 |     14319 |         75 |
+|  7 | sushant  | jadhav | civil      |    87 |     45751 |         65 |
+|  8 | virendra | jadhav | civil      |    56 |     14524 |         88 |
+|  9 | bassi    | jadhav | mechanical |    45 |     45751 |         59 |
+| 10 | raone    | jadhav | design     |    81 |     45751 |         49 |
+| 11 | naruto   | jadhav | jutsu      |   100 |     15424 |         66 |
++----+----------+--------+------------+-------+-----------+------------+
+11 rows in set (0.00 sec)
+
+mysql> update student_data set marks= sqrt(marks) where id=11;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from student_data;
++----+----------+--------+------------+-------+-----------+------------+
+| id | name     | l_name | dept       | marks | paid_fees | attendance |
++----+----------+--------+------------+-------+-----------+------------+
+|  1 | krushna  | jadhav | electrical |    90 |    100245 |         92 |
+|  2 | sanket   | jadhav | IT         |    45 |    139394 |         50 |
+|  3 | rajith   | jadhav | CS         |    44 |     14256 |         55 |
+|  4 | Ram      | jadhav | mechanical |    54 |     51895 |         84 |
+|  5 | mayur    | jadhav | electrical |    86 |     25146 |         95 |
+|  6 | priyanka | jadhav | CS         |    99 |     14319 |         75 |
+|  7 | sushant  | jadhav | civil      |    87 |     45751 |         65 |
+|  8 | virendra | jadhav | civil      |    56 |     14524 |         88 |
+|  9 | bassi    | jadhav | mechanical |    45 |     45751 |         59 |
+| 10 | raone    | jadhav | design     |    81 |     45751 |         49 |
+| 11 | naruto   | jadhav | jutsu      |    10 |     15424 |         66 |
++----+----------+--------+------------+-------+-----------+------------+
+11 rows in set (0.00 sec)
+
+mysql> select curdate();
++------------+
+| curdate()  |
++------------+
+| 2024-03-14 |
++------------+
+1 row in set (0.01 sec)
+
+mysql> curdate --> gives the current date
+    -> ^C
+mysql>
+mysql> now --> gives the current date with time ^C
+mysql>
+mysql> select now();
++---------------------+
+| now()               |
++---------------------+
+| 2024-03-14 18:21:13 |
++---------------------+
+1 row in set (0.01 sec)
+
+mysql> sysdate --> gives the system date ^C
+mysql>
+mysql> select sysdate();
++---------------------+
+| sysdate()           |
++---------------------+
+| 2024-03-14 18:21:44 |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> sysdate --> gives the current date with time   ^C
+mysql>
+mysql> last_day --> gives the last date of given date  ^C
+mysql>
+mysql>
+mysql> select last_date(now());
+ERROR 1305 (42000): FUNCTION kj45.last_date does not exist
+mysql> select last_day(now());
++-----------------+
+| last_day(now()) |
++-----------------+
+| 2024-03-31      |
++-----------------+
+1 row in set (0.00 sec)
+
+mysql> select last_day(1949-01-26);
++----------------------+
+| last_day(1949-01-26) |
++----------------------+
+| NULL                 |
++----------------------+
+1 row in set, 1 warning (0.00 sec)
+
+mysql> select last_day('1949-01-26');
++------------------------+
+| last_day('1949-01-26') |
++------------------------+
+| 1949-01-31             |
++------------------------+
+1 row in set (0.00 sec)
+
+mysql> date_format--> can display the date like user want   ^C
+mysql>
+mysql> select date_format(curdate, %a-%m-%d);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '%a-%m-%d)' at line 1
+mysql> select date_format(curdate, '%a-%m-%d');
+ERROR 1054 (42S22): Unknown column 'curdate' in 'field list'
+mysql> select date_format(curdate(), '%a-%m-%d');
++------------------------------------+
+| date_format(curdate(), '%a-%m-%d') |
++------------------------------------+
+| Thu-03-14                          |
++------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select date_format( curdate(),%A-%b-%g)
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '%A-%b-%g)' at line 1
+mysql>
+mysql>
+mysql> create table unknown(
+    -> id int primary key ,DOB date not null , age int check (age>18) );
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> insert into unlnown (DOB,age) values ('2001-07-29',22);
+ERROR 1146 (42S02): Table 'kj45.unlnown' doesn't exist
+mysql> insert into unknown (DOB,age) values ('2001-07-29',22);
+ERROR 1364 (HY000): Field 'id' doesn't have a default value
+mysql> select * from unlnown;
+ERROR 1146 (42S02): Table 'kj45.unlnown' doesn't exist
+mysql> select * from unknown;
+Empty set (0.00 sec)
+
+mysql> insert into unknown (id,DOB,age) values (1,'2001-07-29',22);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from unknown;
++----+------------+------+
+| id | DOB        | age  |
++----+------------+------+
+|  1 | 2001-07-29 |   22 |
++----+------------+------+
+1 row in set (0.00 sec)
+
+mysql> insert into unknown (id,DOB,age) values (1,'2007-08-19',12);
+ERROR 3819 (HY000): Check constraint 'unknown_chk_1' is violated.
+mysql> insert into unknown (id,DOB,age) values (1,'2007-08-19',22);
+ERROR 1062 (23000): Duplicate entry '1' for key 'unknown.PRIMARY'
+mysql> insert into unknown (id,DOB,age) values (2,'2007-08-19',22);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from unknown;
++----+------------+------+
+| id | DOB        | age  |
++----+------------+------+
+|  1 | 2001-07-29 |   22 |
+|  2 | 2007-08-19 |   22 |
++----+------------+------+
+2 rows in set (0.00 sec)
+
+mysql> select id,date_fromat(dob,%w-%m-%y),age form unknown;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '%w-%m-%y),age form unknown' at line 1
+mysql> select id,date_format(dob,%w-%m-%y),age form unknown;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '%w-%m-%y),age form unknown' at line 1
+mysql> select id,date_format(dob,%w-%m-%y),age from unknown;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '%w-%m-%y),age from unknown' at line 1
+mysql> select id,date_format(dob,'%w-%m-%y'),age from unknown;
++----+-----------------------------+------+
+| id | date_format(dob,'%w-%m-%y') | age  |
++----+-----------------------------+------+
+|  1 | 0-07-01                     |   22 |
+|  2 | 0-08-07                     |   22 |
++----+-----------------------------+------+
+2 rows in set (0.00 sec)
+
+mysql> select id,date_format(dob,'%a-%b-%y'),age from unknown;
++----+-----------------------------+------+
+| id | date_format(dob,'%a-%b-%y') | age  |
++----+-----------------------------+------+
+|  1 | Sun-Jul-01                  |   22 |
+|  2 | Sun-Aug-07                  |   22 |
++----+-----------------------------+------+
+2 rows in set (0.00 sec)
+
+mysql> select id,date_format(dob,'%a-%d-%b-%y'),age from unknown;
++----+--------------------------------+------+
+| id | date_format(dob,'%a-%d-%b-%y') | age  |
++----+--------------------------------+------+
+|  1 | Sun-29-Jul-01                  |   22 |
+|  2 | Sun-19-Aug-07                  |   22 |
++----+--------------------------------+------+
+2 rows in set (0.00 sec)
+
+mysql> select id,date_format(dob,'%a,%d-%b-%y'),age from unknown;
++----+--------------------------------+------+
+| id | date_format(dob,'%a,%d-%b-%y') | age  |
++----+--------------------------------+------+
+|  1 | Sun,29-Jul-01                  |   22 |
+|  2 | Sun,19-Aug-07                  |   22 |
++----+--------------------------------+------+
+2 rows in set (0.00 sec)
+
+mysql>
