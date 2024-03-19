@@ -1,0 +1,285 @@
+Microsoft Windows [Version 10.0.22631.3296]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Program Files\MySQL\MySQL Server 8.0\bin>mysql -u root -p
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 9
+Server version: 8.0.36 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use kj45;
+Database changed
+mysql> show tables;
++----------------+
+| Tables_in_kj45 |
++----------------+
+| client_table   |
+| collage        |
+| coustomers     |
+| my             |
+| product        |
+| student        |
+| student_data   |
+| table1         |
+| table2         |
+| unknown        |
+| user           |
++----------------+
+11 rows in set (0.00 sec)
+
+mysql> select * form table1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'form table1' at line 1
+mysql> select * from table1;
++----+---------+
+| id | name    |
++----+---------+
+|  1 | krushna |
+|  2 | rajith  |
+|  3 | sanket  |
+|  4 | kdambdi |
+|  5 | sanket  |
+|  6 | mortal  |
+|  3 | sanket  |
+|  2 | rajith  |
++----+---------+
+8 rows in set (0.01 sec)
+
+mysql> select * from table2;
++----+---------+
+| id | name    |
++----+---------+
+|  1 | bhuvan  |
+|  2 | rajith  |
+|  3 | mayur   |
+|  4 | kdambdi |
+|  5 | vadapav |
+|  6 | mortal  |
++----+---------+
+6 rows in set (0.01 sec)
+
+mysql> select * from unknown;
++----+------------+------+
+| id | DOB        | age  |
++----+------------+------+
+|  1 | 2001-07-29 |   22 |
+|  2 | 2007-08-19 |   22 |
++----+------------+------+
+2 rows in set (0.01 sec)
+
+mysql> select * from user;
++-----+-----------+
+| uid | user_name |
++-----+-----------+
+|   1 | Krushna   |
+|   2 | Sanket    |
+|   3 | Rajith    |
+|   4 | Shushant  |
+|   5 | Mayur     |
++-----+-----------+
+5 rows in set (0.00 sec)
+
+mysql> select * from product;
++----+-----------------+------+
+| id | product_name    | uid  |
++----+-----------------+------+
+|  1 | Ikigai          |    1 |
+|  2 | mailk           |    1 |
+|  3 | Ice creame      |    2 |
+|  4 | vada pav        |    3 |
+|  5 | dal bati churma |    2 |
++----+-----------------+------+
+5 rows in set (0.00 sec)
+
+mysql> desc product;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| id           | int         | NO   | PRI | NULL    |       |
+| product_name | varchar(20) | YES  |     | NULL    |       |
+| uid          | int         | YES  | MUL | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> desc user;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| uid       | int         | NO   | PRI | NULL    |       |
+| user_name | varchar(20) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select user_name , product_name from product inner joint user on product.id = user.uid ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'joint user on product.id = user.uid' at line 1
+mysql> select user_name , product_name from product inner join user on product.id = user.uid ;
++-----------+-----------------+
+| user_name | product_name    |
++-----------+-----------------+
+| Krushna   | Ikigai          |
+| Sanket    | mailk           |
+| Rajith    | Ice creame      |
+| Shushant  | vada pav        |
+| Mayur     | dal bati churma |
++-----------+-----------------+
+5 rows in set (0.00 sec)
+
+mysql> select user.name , product.product_name from user inner join product on user.uid = product.id;
+ERROR 1054 (42S22): Unknown column 'user.name' in 'field list'
+mysql> select user.user_name , product.product_name from user inner join product on user.uid = product.id;
++-----------+-----------------+
+| user_name | product_name    |
++-----------+-----------------+
+| Krushna   | Ikigai          |
+| Sanket    | mailk           |
+| Rajith    | Ice creame      |
+| Shushant  | vada pav        |
+| Mayur     | dal bati churma |
++-----------+-----------------+
+5 rows in set (0.00 sec)
+
+mysql>
+mysql> insert into product_name values(101,'bananana',null);
+ERROR 1146 (42S02): Table 'kj45.product_name' doesn't exist
+mysql> insert into product values(101,'bananana',null);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into product values(102,'cherry',null);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select product_name from product where uid = null ;
+Empty set (0.00 sec)
+
+mysql> select product_name from product where uid = null ;
+Empty set (0.00 sec)
+
+mysql> select * from product ;
++-----+-----------------+------+
+| id  | product_name    | uid  |
++-----+-----------------+------+
+|   1 | Ikigai          |    1 |
+|   2 | mailk           |    1 |
+|   3 | Ice creame      |    2 |
+|   4 | vada pav        |    3 |
+|   5 | dal bati churma |    2 |
+| 101 | bananana        | NULL |
+| 102 | cherry          | NULL |
++-----+-----------------+------+
+7 rows in set (0.00 sec)
+
+mysql> select product_name from product where uid is null ;
++--------------+
+| product_name |
++--------------+
+| bananana     |
+| cherry       |
++--------------+
+2 rows in set (0.00 sec)
+
+mysql> select id,product_name from product where uid is null ;
++-----+--------------+
+| id  | product_name |
++-----+--------------+
+| 101 | bananana     |
+| 102 | cherry       |
++-----+--------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from product;
++-----+-----------------+------+
+| id  | product_name    | uid  |
++-----+-----------------+------+
+|   1 | Ikigai          |    1 |
+|   2 | mailk           |    1 |
+|   3 | Ice creame      |    2 |
+|   4 | vada pav        |    3 |
+|   5 | dal bati churma |    2 |
+| 101 | bananana        | NULL |
+| 102 | cherry          | NULL |
++-----+-----------------+------+
+7 rows in set (0.00 sec)
+
+mysql> select * from user;
++-----+-----------+
+| uid | user_name |
++-----+-----------+
+|   1 | Krushna   |
+|   2 | Sanket    |
+|   3 | Rajith    |
+|   4 | Shushant  |
+|   5 | Mayur     |
++-----+-----------+
+5 rows in set (0.00 sec)
+
+mysql> select user.user_name , product.product_name from user inner join product on user.uid = product.id;
++-----------+-----------------+
+| user_name | product_name    |
++-----------+-----------------+
+| Krushna   | Ikigai          |
+| Sanket    | mailk           |
+| Rajith    | Ice creame      |
+| Shushant  | vada pav        |
+| Mayur     | dal bati churma |
++-----------+-----------------+
+5 rows in set (0.00 sec)
+
+mysql> select user.user_name , product.product_name from user inner join product on user.uid = product.id;
++-----------+-----------------+
+| user_name | product_name    |
++-----------+-----------------+
+| Krushna   | Ikigai          |
+| Sanket    | mailk           |
+| Rajith    | Ice creame      |
+| Shushant  | vada pav        |
+| Mayur     | dal bati churma |
++-----------+-----------------+
+5 rows in set (0.00 sec)
+
+mysql> select user.user_name , product.product_name from user inner join product on user.uid = product.uid;
++-----------+-----------------+
+| user_name | product_name    |
++-----------+-----------------+
+| Krushna   | Ikigai          |
+| Krushna   | mailk           |
+| Sanket    | Ice creame      |
+| Rajith    | vada pav        |
+| Sanket    | dal bati churma |
++-----------+-----------------+
+5 rows in set (0.00 sec)
+
+mysql> select user.user_name , product.product_name from user inner join product on user.uid = product.uid;
++-----------+-----------------+
+| user_name | product_name    |
++-----------+-----------------+
+| Krushna   | Ikigai          |
+| Krushna   | mailk           |
+| Sanket    | Ice creame      |
+| Rajith    | vada pav        |
+| Sanket    | dal bati churma |
++-----------+-----------------+
+5 rows in set (0.00 sec)
+
+mysql> select '12221212ffdnn';
++---------------+
+| 12221212ffdnn |
++---------------+
+| 12221212ffdnn |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> select '12221212ffdnn' as kuch_bhi;
++---------------+
+| kuch_bhi      |
++---------------+
+| 12221212ffdnn |
++---------------+
+1 row in set (0.00 sec)
+
+mysql>
